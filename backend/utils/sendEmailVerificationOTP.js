@@ -21,7 +21,7 @@ const sendEmailVerificationOTP = async(req,user) => {
     await transporter.sendMail({
         from: process.env.EMAIL_USER, // sender address
         to: user.email,
-        subject: "Verify - OTP ✔", // Subject line
+        subject: "Inceptum Verify Email", // Subject line
         html: Verification_Email_Template.replace("{verificationCode}",otp), // html body
       });
 }

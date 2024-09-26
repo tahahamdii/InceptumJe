@@ -1,10 +1,10 @@
 export const Verification_Email_Template = `
   <!DOCTYPE html>
-  <html lang="en">
+  <html lang="fr">
   <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Verify Your Email</title>
+      <title>Vérifiez Votre Email</title>
       <style>
           body {
               font-family: Arial, sans-serif;
@@ -22,7 +22,7 @@ export const Verification_Email_Template = `
               border: 1px solid #ddd;
           }
           .header {
-              background-color: #4CAF50;
+              background-color: #8B0000; /* Dark Red */
               color: white;
               padding: 20px;
               text-align: center;
@@ -38,9 +38,9 @@ export const Verification_Email_Template = `
               display: block;
               margin: 20px 0;
               font-size: 22px;
-              color: #4CAF50;
-              background: #e8f5e9;
-              border: 1px dashed #4CAF50;
+              color: #8B0000; /* Dark Red */
+              background: #f8d7da;
+              border: 1px dashed #8B0000;
               padding: 10px;
               text-align: center;
               border-radius: 5px;
@@ -62,16 +62,16 @@ export const Verification_Email_Template = `
   </head>
   <body>
       <div class="container">
-          <div class="header">Verify Your Email</div>
+          <div class="header">Vérifiez Votre Email</div>
           <div class="content">
-              <p>Hello,</p>
-              <p>Thank you for signing up! Please confirm your email address by entering the code below:</p>
+              <p>Bonjour,</p>
+              <p>Merci de vous être inscrit ! Veuillez confirmer votre adresse e-mail en entrant le code ci-dessous :</p>
               <span class="verification-code">{verificationCode}</span>
-              <p>If you did not create an account, no further action is required. If you have any questions, feel free to contact our support team.</p>
-              <p>This OTP is valid for 5 minutes.</p>
+              <p>Si vous n'avez pas créé de compte, aucune action supplémentaire n'est requise. Pour toute question, contactez notre équipe de support.</p>
+              <p>Ce code OTP est valable pendant 5 minutes.</p>
           </div>
           <div class="footer">
-              <p>&copy; ${new Date().getFullYear()} NEXTjs-AUTH. All rights reserved.</p>
+              <p>&copy; ${new Date().getFullYear()} Inceptum Je. Tous droits réservés.</p>
           </div>
       </div>
   </body>
