@@ -15,13 +15,15 @@ const app = express();
 const port = process.env.PORT || 3001
 const DATABASE_URL=process.env.DATABASE_URL;
 
-// This will solve CORS Policy ERROR 
 const corsOptions = {
-    origin: process.env.FRONTEND_URL,
-    credentials: true,
-    optionsSuccessStatus: 200
-};
-app.use(cors(corsOptions));
+    origin: "http://localhost:3000", // Make sure this matches the exact origin of your frontend
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
+    credentials: true, // Allow cookies if needed
+    optionsSuccessStatus: 200, // Some legacy browsers choke on 204
+  };
+  
+  // Use CORS middleware
+  app.use(cors(corsOptions));
 
 // JSON
 app.use(express.json());
