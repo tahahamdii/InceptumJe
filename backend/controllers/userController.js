@@ -269,6 +269,7 @@ export const resetPasswordLink = async(req,res)=>{
 
         // Reset Link 
         const resetLink = `${process.env.FRONTEND_URL}/account/reset-password-confirm/${existingUser._id}/${token}`;
+        console.log(token);
 
         // send password reset Email 
         await transporter.sendMail({
