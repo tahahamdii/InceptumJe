@@ -7,6 +7,8 @@ import axios from "axios";
 import { BASE_URL } from "@/constant";
 import toast, { Toaster } from 'react-hot-toast';
 import { useRouter } from "next/navigation";
+import { SignupFormDemo } from "@/components/ui/signupform";
+import LayoutAuth from "@/components/ui/layoutauth";
 
 const initialValues = {
   name: "",
@@ -54,7 +56,10 @@ const Register = () => {
   return (
     <div>
       <Toaster />
-      <div className="flex flex-col justify-center items-center font-[sans-serif] bg-gradient-to-r from-blue-800 to-blue-500 lg:h-screen p-6">
+      <LayoutAuth>
+      <SignupFormDemo/>
+      </LayoutAuth>
+      {/* <div className="flex flex-col justify-center items-center font-[sans-serif] bg-gradient-to-r from-blue-800 to-blue-500 lg:h-screen p-6">
 
       <div className="grid md:grid-cols-2 items-center gap-y-8 bg-white max-w-7xl w-full shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-md overflow-hidden">
         <div className="max-md:order-1 flex flex-col justify-center sm:p-8 p-4 bg-gradient-to-r from-blue-600 to-blue-700 w-full h-full">
@@ -121,7 +126,7 @@ const Register = () => {
           </div>
         </form>
       </div>
-    </div>
+    </div> */}
     </div>
   )
 }

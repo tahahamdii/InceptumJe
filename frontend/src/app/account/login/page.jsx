@@ -7,6 +7,9 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import { BASE_URL } from "@/constant";
 import toast, { Toaster } from 'react-hot-toast';
+import { SignupFormDemo } from "@/components/ui/signupform";
+import { LoginForm } from "@/components/ui/signinform";
+import LayoutAuth from "@/components/ui/layoutauth";
 
 const initialValues = {
   email: "",
@@ -60,69 +63,9 @@ const Login = () => {
   return (
     <div>
     <Toaster />
-    <div className="flex flex-col justify-center items-center font-[sans-serif] bg-gradient-to-r from-blue-800 to-blue-500 lg:h-screen p-6">
-
-    <div className="grid md:grid-cols-2 items-center gap-y-8 bg-white max-w-7xl w-full shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-md overflow-hidden">
-      <div className="max-md:order-1 flex flex-col justify-center sm:p-8 p-4 bg-gradient-to-r from-blue-600 to-blue-700 w-full h-full">
-        <div className="max-w-md space-y-12 mx-auto">
-          <div>
-            <h4 className="text-white text-lg font-semibold">Create Your Account</h4>
-            <p className="text-[13px] text-white mt-2">Welcome to our registration page! Get started by creating your account.</p>
-          </div>
-          <div>
-            <h4 className="text-white text-lg font-semibold">Simple & Secure Registration</h4>
-            <p className="text-[13px] text-white mt-2">Our registration process is designed to be straightforward and secure. We prioritize your privacy and data security.</p>
-          </div>
-          <div>
-            <h4 className="text-white text-lg font-semibold">Terms and Conditions Agreement</h4>
-            <p className="text-[13px] text-white mt-2">Require users to accept the terms and conditions of your service during registration.</p>
-          </div>
-        </div>
-      </div>
-
-      <form className="sm:p-8 p-4 w-full" onSubmit={handleSubmit}>
-        <div className="mb-12">
-          <h3 className="text-blue-500 text-3xl font-extrabold max-md:text-center">Login</h3>
-        </div>
-
-        <div className="flex flex-col gap-5">
-          <div>
-            <label className="text-gray-800 text-sm mb-2 block">Email Id</label>
-            <input name="email" value={values.email} onChange={handleChange} type="text" className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded-md outline-blue-500" placeholder="Enter email" />
-
-            {errors.email && <div className="text-sm text-red-500 px-2 mt-1">{errors.email}</div>}
-          </div>
-
-          <div>
-            <label className="text-gray-800 text-sm mb-2 block">Password</label>
-            <input name="password" value={values.password} onChange={handleChange} type="password" className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded-md outline-blue-500" placeholder="Enter password" />
-
-            {errors.password && <div className="text-sm text-red-500 px-2 mt-1">{errors.password}</div>}
-          </div>
-        </div>
-
-        <div className="flex justify-between items-end">
-          <div className="block text-sm mt-6">
-            Don't have an account?
-            <Link href="/account/register">
-              <span className="text-blue-500 cursor-pointer"> Register here</span>
-            </Link>
-          </div>
-          
-          <Link href="/account/reset-password-link">
-          <div className="block text-sm mt-6 cursor-pointer text-blue-800">
-            Forgot Password?
-          </div>
-          </Link>
-        </div>
-        <div className="mt-3 flex items-center justify-center">
-          <button type="submit" className="py-3 px-6 w-full text-sm tracking-wide font-semibold rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none transition-all disabled:bg-gray-500" disabled={loading}>
-            Login
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
+    <LayoutAuth>
+    <LoginForm/>
+    </LayoutAuth>
   </div>
   )
 }
