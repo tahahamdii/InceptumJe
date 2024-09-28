@@ -37,8 +37,9 @@ const Login = () => {
 
         if (response.data && response.status === 200) {
           toast.success(response.data.message);
-          setLoading(false);
           router.push("/user/dashboard");
+
+          setLoading(false);
           actions.resetForm();
         };
       } catch (error) {
