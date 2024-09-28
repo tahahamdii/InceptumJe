@@ -35,7 +35,7 @@ const Login = () => {
         const response = await axios.post(`${BASE_URL}/login`, values, { withCredentials: true });
         console.log("Response is: ", response);
 
-        if (response.data && response.status === 200) {
+        if (response.status === 200) {
           toast.success(response.data.message);
           console.log("Navigating to dashboard"); // Debugging line
           router.push("/user/dashboard");
