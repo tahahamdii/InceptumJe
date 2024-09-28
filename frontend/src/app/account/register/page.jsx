@@ -53,7 +53,7 @@ const Register = () => {
   }, []);
 
   return (
-    <LayoutAuth>
+    <>
     <div>
     <Toaster />
 
@@ -98,7 +98,7 @@ const Register = () => {
       </form>
     </div>
   </div>
-  </LayoutAuth>
+  </>
   );
 }
 
