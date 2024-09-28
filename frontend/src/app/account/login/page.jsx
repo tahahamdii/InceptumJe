@@ -37,7 +37,10 @@ const Login = () => {
 
         if (response.data && response.status === 200) {
           toast.success(response.data.message);
+          console.log("Navigating to dashboard"); // Debugging line
           router.push("/user/dashboard");
+          window.location.href = "/user/dashboard";
+
 
           setLoading(false);
           actions.resetForm();
