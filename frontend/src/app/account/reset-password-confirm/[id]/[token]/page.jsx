@@ -1,13 +1,14 @@
-"use client"
-import { useState,useEffect } from "react";
+"use client";
+import { useState, useEffect } from "react";
 import { useFormik } from "formik";
-import Link from "next/link";
-import { resetPasswordConfirm } from "@/validation/schemas";
-import { useParams } from "next/navigation";
+import { useRouter } from 'next/navigation'; // Corrected import for useRouter
+import { resetPasswordConfirm } from "@/validation/schemas"; // Ensure the path to the schema is correct
 import axios from "axios";
 import { BASE_URL } from "@/constant";
 import toast, { Toaster } from 'react-hot-toast';
-import { useRouter } from "next/navigation";
+import { Label } from "../../../../../components/ui/label";
+import { Input } from "../../../../../components/ui/input";
+import { cn } from "@/lib/utils";
 
 const initialValues = {
   password: "",
@@ -15,96 +16,86 @@ const initialValues = {
 };
 
 const ResetPasswordConfirm = () => {
-  const { id, token } = useParams();
-  const [loading, setloading] = useState(false);
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
-  const { values, errors, handleChange, handleSubmit} = useFormik({
+  const formik = useFormik({
     initialValues,
     validationSchema: resetPasswordConfirm,
-    onSubmit: async (values,action) =>{
-      console.log(values);
-
-      setloading(true);
+    onSubmit: async (values, actions) => {
+      setLoading(true);
       try {
-        const response = await axios.post(`${BASE_URL}/reset-password/${id}/${token}`,values);
-        console.log("Response is : ",response);
+        const response = await axios.post(`${BASE_URL}/reset-password/${router.query.id}/${router.query.token}`, values);
+        console.log(`Sending request to: ${BASE_URL}/reset-password/${router.query.id}/${router.query.token}`, values);
 
-        if(response.data && response.status === 200){
+        if (response.data && response.status === 200) {
           toast.success(response.data.message);
-          setloading(false);
           router.push('/account/login');
-          action.resetForm();
-        };
-
-      } catch (error) {
-        console.error('Api failed ',error.response);
-        if(error.response.status === 404){
-          toast.error("User not found")
-          setloading(false);
+          actions.resetForm();
         }
-        setloading(false);
-      }
+      } catch (error) {
+        toast.error(error.response?.data?.message || "Reset failed");
+        console.log(error.response); // This will give you more insight into what the server is responding with
 
+      } finally {
+        setLoading(false);
+      }
     }
   });
 
+  useEffect(() => {
+    toast.dismiss();
+  }, []);
+
+
+
   return (
     <div>
-   <Toaster />
-    <div className="flex flex-col justify-center items-center font-[sans-serif] bg-gradient-to-r from-blue-800 to-blue-500 lg:h-screen p-6">
+      <Toaster />
+      <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-white dark:bg-black">
+        <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200">Reset Your Password</h2>
+        <p className="text-neutral-600 text-sm max-w-sm mt-2 dark:text-neutral-300">Please enter your new password below.</p>
+        <form onSubmit={formik.handleSubmit} className="my-8">
+          <LabelInputContainer className="mb-4">
+            <Label htmlFor="password">New Password</Label>
+            <Input
+              id="password"
+              name="password"
+              type="password"
+              onChange={formik.handleChange}
+              value={formik.values.password}
+              placeholder="••••••••"
+            />
+            {formik.errors.password && <div className="text-sm text-red-500 px-2 mt-1">{formik.errors.password}</div>}
+          </LabelInputContainer>
+          <LabelInputContainer className="mb-8">
+            <Label htmlFor="password_confirmation">Confirm New Password</Label>
+            <Input
+              id="password_confirmation"
+              name="password_confirmation"
+              type="password"
+              onChange={formik.handleChange}
+              value={formik.values.password_confirmation}
+              placeholder="••••••••"
+            />
+            {formik.errors.password_confirmation && <div className="text-sm text-red-500 px-2 mt-1">{formik.errors.password_confirmation}</div>}
+          </LabelInputContainer>
 
-    <div className="grid md:grid-cols-2 items-center gap-y-8 bg-white max-w-7xl w-full shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-md overflow-hidden">
-      <div className="max-md:order-1 flex flex-col justify-center sm:p-8 p-4 bg-gradient-to-r from-blue-600 to-blue-700 w-full h-full">
-        <div className="max-w-md space-y-12 mx-auto">
-          <div>
-            <h4 className="text-white text-lg font-semibold">Create Your Account</h4>
-            <p className="text-[13px] text-white mt-2">Welcome to our registration page! Get started by creating your account.</p>
-          </div>
-          <div>
-            <h4 className="text-white text-lg font-semibold">Simple & Secure Registration</h4>
-            <p className="text-[13px] text-white mt-2">Our registration process is designed to be straightforward and secure. We prioritize your privacy and data security.</p>
-          </div>
-          <div>
-            <h4 className="text-white text-lg font-semibold">Terms and Conditions Agreement</h4>
-            <p className="text-[13px] text-white mt-2">Require users to accept the terms and conditions of your service during registration.</p>
-          </div>
-        </div>
-      </div>
-
-      <form className="sm:p-8 p-4 w-full" onSubmit={handleSubmit}>
-        <div className="mb-12">
-          <h3 className="text-blue-500 text-3xl font-extrabold max-md:text-center">Reset Password</h3>
-        </div>
-
-        <div className="flex flex-col gap-5">
-          <div>
-            <label className="text-gray-800 text-sm mb-2 block">New Password</label>
-            <input name="password" value={values.password} onChange={handleChange} type="password" className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded-md outline-blue-500" placeholder="Enter password" />
-
-            {errors.password && <div className="text-sm text-red-500 px-2 mt-1">{errors.password}</div>}
-          </div>
-
-
-             <div>
-              <label className="text-gray-800 text-sm mb-2 block">Confirm New Password</label>
-              <input name="password_confirmation" value={values.password_confirmation} onChange={handleChange} type="password" className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3 rounded-md outline-blue-500" placeholder="Enter confirm password" />
-
-              {errors.password_confirmation && <div className="text-sm text-red-500 px-2 mt-1">{errors.password_confirmation}</div>}
-            </div>
-        </div>
-
-
-        <div className="mt-6 flex items-center justify-center">
-          <button type="submit" className="py-3 px-6 w-full text-sm tracking-wide font-semibold rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none transition-all">
-            Reset Password
+          <button
+            type="submit"
+            className="bg-gradient-to-br from-black to-neutral-600 w-full text-white rounded-md h-10 font-medium shadow"
+            disabled={loading || formik.isSubmitting}
+          >
+            Reset Password &rarr;
           </button>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
-  </div>
-  </div>
-  )
-}
+  );
+};
+
+const LabelInputContainer = ({ children, className }) => (
+  <div className={`flex flex-col space-y-2 w-full ${className}`}>{children}</div>
+);
 
 export default ResetPasswordConfirm;

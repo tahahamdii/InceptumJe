@@ -92,6 +92,20 @@ const Login = () => {
             Se connecter &rarr;
           </button>
         </form>
+        <div className="flex justify-between items-center mt-5 text-sm">
+          <a
+            href="/account/reset-password-link"
+            className="text-zink-600 dark:text-white hover:underline"
+          >
+            Mot de passe oublié ?
+          </a>
+          <a
+            href="/account/register"
+            className="text-zinc-600 dark:text-white hover:underline"
+          >
+            Créer un compte
+          </a>
+        </div>
       </div>
     </div>
     </LayoutAuth>
