@@ -80,7 +80,7 @@ const ResetPasswordLink = () => {
           </LabelInputContainer>
 
           <div className="block text-sm mt-6">
-            Don't have an account?{" "}
+            Don t have an account?{" "}
             <Link href="/account/register">
               <span className="text-blue-500 cursor-pointer">Register here</span>
             </Link>

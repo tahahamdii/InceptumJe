@@ -13,7 +13,7 @@ const Navbar = () => {
         Inceptum Junior <br /> Entreprise.
       </h2>
       <p className="max-w-xs sm:max-w-sm md:max-w-md lg:max-w-xl mx-auto text-xs sm:text-sm md:text-lg text-neutral-700 dark:text-neutral-400 text-center">
-        L'excellence et l'innovation au service de vos projets.
+        L excellence et l innovation au service de vos projets.
       </p>
       <Link href="/account/login" className="flex items-center">
 

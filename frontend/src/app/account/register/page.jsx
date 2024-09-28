@@ -62,7 +62,7 @@ const Register = () => {
         Bienvenue à Inceptum
       </h2>
       <p className="text-neutral-600 text-sm max-w-sm mt-2 dark:text-neutral-300">
-        Connectez-vous à Inceptum, même si nous n'avons pas encore un flux de connexion complet.
+        Connectez-vous à Inceptum, même si nous n avons pas encore un flux de connexion complet.
       </p>
       <form className="my-8" onSubmit={formik.handleSubmit}>
         <LabelInputContainer className="mb-4">
@@ -87,7 +87,7 @@ const Register = () => {
           type="submit"
           disabled={loading}
         >
-          S'inscrire &rarr;
+          S inscrire &rarr;
         </button>
 
         <div className="items-center justify-between text-sm text-neutral-700 dark:text-neutral-400 mt-6">
