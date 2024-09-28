@@ -16,7 +16,7 @@ const port = process.env.PORT || 3001
 const DATABASE_URL=process.env.DATABASE_URL;
 
 const corsOptions = {
-    origin: "http://localhost:3000", // Make sure this matches the exact origin of your frontend
+    origin: "https://inceptumje.vercel.app", // Make sure this matches the exact origin of your frontend
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
     credentials: true, // Allow cookies if needed
     optionsSuccessStatus: 200, // Some legacy browsers choke on 204
