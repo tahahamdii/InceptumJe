@@ -8,7 +8,7 @@ import axios from "axios";
 import { BASE_URL } from "@/constant";
 import toast, { Toaster } from 'react-hot-toast';
 import { SignupFormDemo } from "@/components/ui/signupform";
-import { LoginForm } from "@/components/ui/signinform";
+import  LoginForm  from "@/components/ui/signinform";
 import LayoutAuth from "@/components/ui/layoutauth";
 
 const initialValues = {
