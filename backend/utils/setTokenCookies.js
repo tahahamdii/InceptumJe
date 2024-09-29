@@ -2,13 +2,14 @@ const setTokenCookies = (res, accessToken, refreshToken, newAccessTokenExp, newR
   // Calculate the expiration time for the access token
   const accessTokenMaxAge = (newAccessTokenExp - Math.floor(Date.now() / 1000)) * 1000;
   const refreshTokenMaxAge = (newRefreshTokenExp - Math.floor(Date.now() / 1000)) * 1000;
+  const twoHoursInMilliseconds = 7200 * 1000;
 
   // Set cookies for access token
   res.cookie('accessToken', accessToken, {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production', // Only use secure cookies in production
     sameSite: 'None', // Allows cookies to be sent with cross-site requests
-    maxAge: accessTokenMaxAge,
+    maxAge: twoHoursInMilliseconds,
   });
 
   // Set cookies for refresh token
@@ -16,7 +17,7 @@ const setTokenCookies = (res, accessToken, refreshToken, newAccessTokenExp, newR
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production', // Only use secure cookies in production
     sameSite: 'None', // Allows cookies to be sent with cross-site requests
-    maxAge: refreshTokenMaxAge,
+    maxAge: twoHoursInMilliseconds,
   });
 
   // Set cookie for is_auth (if needed)
@@ -24,7 +25,7 @@ const setTokenCookies = (res, accessToken, refreshToken, newAccessTokenExp, newR
     httpOnly: false,
     secure: process.env.NODE_ENV === 'production', // Should also be secure in production if used
     sameSite: 'None', // Allows cookies to be sent with cross-site requests
-    maxAge: refreshTokenMaxAge,
+    maxAge: twoHoursInMilliseconds,
   });
 };
 
