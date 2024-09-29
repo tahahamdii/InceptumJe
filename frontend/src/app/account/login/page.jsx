@@ -43,7 +43,6 @@ const Login = () => {
 
 
           setLoading(false);
-          actions.resetForm();
         };
       } catch (error) {
         console.error("API failed: ", error.response);
